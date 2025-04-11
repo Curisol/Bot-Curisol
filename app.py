@@ -5,7 +5,7 @@ from flask import Flask, request
 app = Flask(__name__)
 
 # Pegá tu clave API aquí directamente
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") or "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"
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") or "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"
 
 @app.route("/", methods=["GET"])
 def home():
