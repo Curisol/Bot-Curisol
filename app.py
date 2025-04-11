@@ -1,17 +1,21 @@
 import os
 import requests
 from flask import Flask, request
+from dotenv import load_dotenv
+
+# Cargar variables desde .env
+load_dotenv()
 
 app = Flask(__name__)
 
-# Tu API Key, organización y proyecto reales
-OPENAI_API_KEY = "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"
+# API Key segura desde .env
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_ORG_ID = "org-iTVIYG3D6kGi443rtfD7anuw"
 OPENAI_PROJECT_ID = "proj_HnqW5nde4w6JZWKqouQdeJhO"
 
 @app.route("/", methods=["GET"])
 def home():
-    return "Bot Curisol en línea con GPT (versión producción) ⚡"
+    return "Bot Curisol en línea con GPT (Producción segura) ⚡"
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
@@ -64,3 +68,5 @@ def openai_response(user_input):
 
 if __name__ == "__main__":
     app.run()
+
+      
