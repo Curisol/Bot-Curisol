@@ -4,13 +4,14 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-# Pegá tu clave API aquí directamente
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") or "sk-vHSKRxKnaPQBaaCP4PIMkT3BlbkFJwolwacLRpuBCWRstVziyeOhUh3ULX3gCV95NDmuWifstJe9yCOBGDmVU-ZhPJgtUhUXYURE8MA"
-
+# Tu API Key, organización y proyecto reales
+OPENAI_API_KEY = "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"
+OPENAI_ORG_ID = "org-iTVIYG3D6kGi443rtfD7anuw"
+OPENAI_PROJECT_ID = "proj_HnqW5nde4w6JZWKqouQdeJhO"
 
 @app.route("/", methods=["GET"])
 def home():
-    return "Bot Curisol en línea con GPT ⚡"
+    return "Bot Curisol en línea con GPT (versión producción) ⚡"
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
@@ -19,7 +20,6 @@ def webhook():
     print(f"Mensaje de {sender}: {incoming_msg}")
 
     if incoming_msg:
-        # Llamar a OpenAI
         response = openai_response(incoming_msg)
     else:
         response = "No entendí tu mensaje 🤖"
@@ -33,12 +33,14 @@ def openai_response(user_input):
         url = "https://api.openai.com/v1/chat/completions"
         headers = {
             "Authorization": f"Bearer {OPENAI_API_KEY}",
+            "OpenAI-Organization": OPENAI_ORG_ID,
+            "OpenAI-Project": OPENAI_PROJECT_ID,
             "Content-Type": "application/json"
         }
         data = {
             "model": "gpt-3.5-turbo",
             "messages": [
-                {"role": "system", "content": "Eres un asistente amigable y profesional de Curisol. Responde de manera clara, cercana y útil."},
+                {"role": "system", "content": "Eres un asistente profesional, amigable y claro, parte del equipo de Curisol."},
                 {"role": "user", "content": user_input}
             ],
             "temperature": 0.7
