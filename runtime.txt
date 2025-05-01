@@ -1,0 +1,1 @@
+python-3.9.13  # Versión estable y compatible con Render
