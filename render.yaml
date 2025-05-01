@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: bot-curisol
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn curibot:app --bind 0.0.0.0:10000"
+    envVars:
+      - key: WEBHOOK_TOKEN
+        value: curisol2024
